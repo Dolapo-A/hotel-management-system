@@ -10,9 +10,9 @@ export function useBookedDates(roomId) {
 	} = useQuery({
 		queryKey: ["bookedDates", roomId],
 		queryFn: () => getBookedDatesByRoomId(roomId),
-		refetchInterval: 60000,
+		refetchInterval: 30000,
 		refetchOnWindowFocus: true,
-		staleTime: 30000,
+		staleTime: 10000,
 	});
 
 	return { isLoading, bookedDates, error };

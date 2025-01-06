@@ -73,43 +73,43 @@ const NightsMultiplier = styled.p`
 	padding: 0.5rem 0.75rem;
 	background-color: var(--color-brand-500);
 	font-size: 1.5rem;
-	`;
-	
-	// Styles for components of DayPicker Calender
-	const monthCaptionStyle = {
-		paddingBottom: "0.5em",
-	};
-	
-	const dayNumberStyle = {
-		fontSize: "1.4rem",
-	};
-	
-	const selectedDay = {
-		padding: "2rem",
-	};
-	
-	const navChevron = {
-		fill: "red",
-	};
-	
-	const { navButtonNext, navButtonPrev } = {
-		border: "2px solid red",
-		padding: "10rem",
-		borderRadius: "5px",
-		cursor: "pointer",
-	};
-	
-	const dayButton = {
-		padding: "1.5rem",
-	};
-	
-	const rangeMiddle = {
-		backgroundColor: "green !important",
-		padding: "1.5rem",
-	};
-	
-	function isAlreadyBooked(range, datesArr) {
-		return (
+`;
+
+// Styles for components of DayPicker Calender
+const monthCaptionStyle = {
+	paddingBottom: "0.5em",
+};
+
+const dayNumberStyle = {
+	fontSize: "1.4rem",
+};
+
+const selectedDay = {
+	padding: "2rem",
+};
+
+const navChevron = {
+	fill: "red",
+};
+
+const { navButtonNext, navButtonPrev } = {
+	border: "2px solid red",
+	padding: "10rem",
+	borderRadius: "5px",
+	cursor: "pointer",
+};
+
+const dayButton = {
+	padding: "1.5rem",
+};
+
+const rangeMiddle = {
+	backgroundColor: "green !important",
+	padding: "1.5rem",
+};
+
+function isAlreadyBooked(range, datesArr) {
+	return (
 		range?.from &&
 		range?.to &&
 		datesArr.some((date) =>
@@ -134,13 +134,6 @@ function DateSelector({ settings, room, bookedDates }) {
 	const cabinPrice = numNights * (regularPrice - discount);
 
 	const isDisabledDate = (curDate) => {
-		// const today = startOfDay(new Date());
-
-		// return (
-		// 	(isPast(curDate) && !isSameDay(curDate, today)) ||
-		// 	bookedDates?.some((date) => isSameDay(date, curDate))
-		// );
-
 		const today = startOfDay(new Date());
 
 		// Disable dates in the past
