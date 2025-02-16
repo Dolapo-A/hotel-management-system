@@ -8,10 +8,9 @@ const PanelContainer = styled.div`
 	border-radius: 7px;
 	border: 2px solid var(--color-grey-100);
 
-	width: 300px;
-	height: 300px;
+	width: 100%;
+	height: 100%;
 	overflow-y: scroll;
-	/* background-color: var(--color-grey-100); */
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;

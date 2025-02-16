@@ -19,6 +19,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Guests from "./pages/Guests";
 import Reservation from "./pages/Reservation";
+import "./styles/index.css";
 
 const queryClient = new QueryClient({
 	defaultOptions: {

@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
 import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import { Calendar } from "@/components/ui/calendar";
+import "react-datepicker/dist/react-datepicker.css";
 import {
 	differenceInDays,
 	isPast,
@@ -20,15 +22,11 @@ const StyledDateSelector = styled.div`
 	flex-direction: column;
 `;
 
-const StyledDayPicker = styled(DayPicker)`
-	padding: 1.5rem 2.5rem;
-`;
-
 const PriceBar = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 2rem;
+	padding: 0 1rem;
 	background-color: var(--color-brand-500);
 	border-top: none;
 
@@ -75,39 +73,6 @@ const NightsMultiplier = styled.p`
 	font-size: 1.5rem;
 `;
 
-// Styles for components of DayPicker Calender
-const monthCaptionStyle = {
-	paddingBottom: "0.5em",
-};
-
-const dayNumberStyle = {
-	fontSize: "1.4rem",
-};
-
-const selectedDay = {
-	padding: "2rem",
-};
-
-const navChevron = {
-	fill: "red",
-};
-
-const { navButtonNext, navButtonPrev } = {
-	border: "2px solid red",
-	padding: "10rem",
-	borderRadius: "5px",
-	cursor: "pointer",
-};
-
-const dayButton = {
-	padding: "1.5rem",
-};
-
-const rangeMiddle = {
-	backgroundColor: "green !important",
-	padding: "1.5rem",
-};
-
 function isAlreadyBooked(range, datesArr) {
 	return (
 		range?.from &&
@@ -122,6 +87,8 @@ function DateSelector({ settings, room, bookedDates }) {
 	const { minBookingLength, maxBookingLength } = settings;
 
 	const { range, setRange, resetRange } = useReservation();
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
 
 	const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
 
@@ -129,8 +96,9 @@ function DateSelector({ settings, room, bookedDates }) {
 
 	const numNights =
 		range?.from && range?.to
-			? Math.max(1, differenceInDays(displayRange.to, displayRange.from))
+			? Math.max(1, differenceInDays(range.to, range.from))
 			: 0;
+
 	const cabinPrice = numNights * (regularPrice - discount);
 
 	const isDisabledDate = (curDate) => {
@@ -151,32 +119,23 @@ function DateSelector({ settings, room, bookedDates }) {
 		return false;
 	};
 
+	console.log(range?.from, range?.to);
+
 	return (
 		<StyledDateSelector>
-			<StyledDayPicker
+			<Calendar
 				mode="range"
 				onSelect={setRange}
 				selected={displayRange}
 				min={minBookingLength}
-				max={maxBookingLength}
+				max={maxBookingLength + 1}
 				fromMonth={new Date()}
 				fromDate={new Date()}
-				toYear={new Date().getFullYear() + 5}
-				captionLayout="dropdown"
+				// startDate={startDate}
+				// endDate={endDate}
+				// captionLayout="dropdown"
 				numberOfMonths={2}
 				disabled={isDisabledDate}
-				// hideNavigation
-				styles={{
-					month_caption: monthCaptionStyle,
-					day: dayNumberStyle,
-					day_button: dayButton,
-					selected: selectedDay,
-					button_next: navButtonNext,
-					button_previous: navButtonPrev,
-					range_start: dayButton,
-					range_middle: rangeMiddle,
-					chevron: navChevron,
-				}}
 			/>
 
 			<PriceBar>
@@ -192,21 +151,21 @@ function DateSelector({ settings, room, bookedDates }) {
 						)}
 						<span>/night</span>
 					</Price>
-					{numNights > 1 ? (
+					{numNights > 0 ? (
 						<>
 							<NightsMultiplier>
 								<span>&times;</span> <span>{numNights}</span>
 							</NightsMultiplier>
-							<h2>
+							<div className="text-2xl">
 								<span>
 									<span>Total</span> <span>{formatCurrency(cabinPrice)}</span>
 								</span>
-							</h2>
+							</div>
 						</>
 					) : null}
 				</PriceInfo>
 
-				{(range?.from || range?.to) && (
+				{numNights && (
 					<Button
 						style={{
 							color: "#18212f",

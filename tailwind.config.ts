@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ["./src/**/*.{html,js,jsx,ts,tsx}", "./index.html"],
+	content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
 	theme: {
 		extend: {
+			
 			colors: {
 				"brand-50": "var(--color-brand-50)",
 				"brand-100": "var(--color-brand-100)",

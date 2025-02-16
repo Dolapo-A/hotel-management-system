@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
+import { Calendar } from "@/components/ui/calendar";
 import styled from "styled-components";
 import { format, isWithinInterval, differenceInDays } from "date-fns";
 import Spinner from "../../ui/Spinner";
@@ -126,7 +127,20 @@ function BookingCalendar() {
 
 	return (
 		<CalendarContainer>
-			<StyledDayPicker
+			<Calendar
+				className="rounded-xl border-2 border-grey-100 w-full h-full"
+				selected={dateRange}
+				onSelect={handleRangeSelect}
+				modifiers={{
+					booked: (date) =>
+						bookingsByDate[format(date, "yyyy-MM-dd")]?.length > 0,
+				}}
+				modifiersStyles={{
+					booked: { backgroundColor: "var(--color-grey-300)" },
+				}}
+				mode="range"
+			/>
+			{/* <StyledDayPicker
 				mode="range"
 				onDayClick={handleDaySelect}
 				selected={dateRange}
@@ -149,7 +163,7 @@ function BookingCalendar() {
 					range_middle: rangeMiddle,
 					chevron: navChevron,
 				}}
-			/>
+			/> */}
 			<BookingDetailsPanel
 				selectedDate={selectedDate}
 				bookings={selectedBookings}
