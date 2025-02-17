@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { useRef, useState } from "react";
-import { DayPicker } from "react-day-picker";
 import { Calendar } from "@/components/ui/calendar";
 import styled from "styled-components";
 import { format, isWithinInterval, differenceInDays } from "date-fns";
@@ -24,13 +23,6 @@ const CalendarContainer = styled.div`
 	border: 2px solid var(--color-grey-100);
 	background-color: var(--color-grey-0);
 	border-radius: 7px;
-`;
-
-const StyledDayPicker = styled(DayPicker)`
-	border-radius: 7px;
-	display: flex;
-	justify-content: center;
-	width: 100%;
 `;
 
 // Styles as provided
@@ -129,6 +121,7 @@ function BookingCalendar() {
 		<CalendarContainer>
 			<Calendar
 				className="rounded-xl border-2 border-grey-100 w-full h-full"
+				onDayClick={handleDaySelect}
 				selected={dateRange}
 				onSelect={handleRangeSelect}
 				modifiers={{
@@ -140,30 +133,7 @@ function BookingCalendar() {
 				}}
 				mode="range"
 			/>
-			{/* <StyledDayPicker
-				mode="range"
-				onDayClick={handleDaySelect}
-				selected={dateRange}
-				onSelect={handleRangeSelect}
-				modifiers={{
-					booked: (date) =>
-						bookingsByDate[format(date, "yyyy-MM-dd")]?.length > 0,
-				}}
-				modifiersStyles={{
-					booked: { backgroundColor: "var(--color-silver-100)" },
-				}}
-				styles={{
-					month_caption: monthCaptionStyle,
-					day: dayNumberStyle,
-					day_button: dayButton,
-					selected: selectedDay,
-					button_next: navButtonStyle,
-					button_previous: navButtonStyle,
-					range_start: dayButton,
-					range_middle: rangeMiddle,
-					chevron: navChevron,
-				}}
-			/> */}
+			
 			<BookingDetailsPanel
 				selectedDate={selectedDate}
 				bookings={selectedBookings}
