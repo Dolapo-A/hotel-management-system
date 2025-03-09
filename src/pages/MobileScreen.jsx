@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Heading from "../ui/Heading";
 
 const StyledMobileScreen = styled.div`
 	display: flex;
@@ -16,10 +17,10 @@ function MobileScreen() {
 		<>
 			<StyledMobileScreen>
 				<div>
-					<h1>
+					<Heading as="h4">
 						For the best experience, please use a device with a larger screen
 						😁. We recommend a width of at least 1024px.
-					</h1>
+					</Heading>
 				</div>
 			</StyledMobileScreen>
 		</>
