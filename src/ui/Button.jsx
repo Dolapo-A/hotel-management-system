@@ -53,10 +53,13 @@ sizes;
 
 const Button = styled.button`
 	border: none;
+	display: flex;
+	justify-content: center;
 	border-radius: var(--border-radius-sm);
 	box-shadow: var(--shadow-sm);
 	${(props) => sizes[props.size]}
 	${(props) => variations[props.variation]}
+	
 `;
 
 Button.defaultProps = {
