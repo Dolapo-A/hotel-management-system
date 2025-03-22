@@ -131,9 +131,6 @@ function DateSelector({ settings, room, bookedDates }) {
 				max={maxBookingLength + 1}
 				fromMonth={new Date()}
 				fromDate={new Date()}
-				// startDate={startDate}
-				// endDate={endDate}
-				// captionLayout="dropdown"
 				numberOfMonths={2}
 				disabled={isDisabledDate}
 			/>

@@ -34,7 +34,7 @@ const queryClient = new QueryClient({
 
 function App() {
 	const { width } = useWindowSize();
-	const isMobile = width < 768;
+	const isMobile = width < 1024;
 	return (
 		<>
 			{isMobile ? (
