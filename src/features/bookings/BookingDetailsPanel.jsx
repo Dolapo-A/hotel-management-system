@@ -7,12 +7,22 @@ const PanelContainer = styled.div`
 	background-color: var(--color-grey-50);
 	border-radius: 7px;
 	border: 2px solid var(--color-grey-100);
-
 	width: 100%;
 	height: 100%;
-	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
+	gap: 1rem;
+	scroll-behavior: smooth;
+	overflow-x: scroll;
+	overflow-y: hidden;
+`;
+
+const PanelContent = styled.div`
+	width: 1000px;
+	/* background-color: red; */
+	height: 100%;
+	display: flex;
+	flex-direction: row;
 	gap: 1rem;
 `;
 
@@ -57,22 +67,24 @@ const BookingDetailsPanel = ({ selectedDate, bookings }) => {
 			<p>
 				Number of bookings: <strong> {bookings.length}</strong>
 			</p>
-			{bookings.map((booking, index) => (
-				<BookingItem key={index}>
-					<p>
-						<strong>Room:</strong> {booking.room}
-					</p>
-					<p>
-						<strong>Guest:</strong> {booking.guest}
-					</p>
-					<p>
-						<strong>Night(s):</strong> {booking.numNights}
-					</p>
-					<p>
-						<strong>Status:</strong> {booking.status}
-					</p>
-				</BookingItem>
-			))}
+			<PanelContent>
+				{bookings.map((booking, index) => (
+					<BookingItem key={index}>
+						<p>
+							<strong>Room:</strong> {booking.room}
+						</p>
+						<p>
+							<strong>Guest:</strong> {booking.guest}
+						</p>
+						<p>
+							<strong>Night(s):</strong> {booking.numNights}
+						</p>
+						<p>
+							<strong>Status:</strong> {booking.status}
+						</p>
+					</BookingItem>
+				))}
+			</PanelContent>
 		</PanelContainer>
 	);
 };
